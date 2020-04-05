@@ -39,8 +39,20 @@ int palindrome_partition(string arr,int i,int j){
     }
     int temp;
     int minm  = INT_MAX;
+    int left;
+    int right;
     for(int k=i;k<j;k++){
-        temp = palindrome_partition(arr,i,k)+palindrome_partition(arr,k+1,j)+1;
+        if(memo[i][k] != -1){
+            left = memo[i][k];
+        }else{
+            left = palindrome_partition(arr,i,k);
+        }
+        if(memo[i][k] != -1){
+            right = memo[k+1][j];
+        }else{
+            right = palindrome_partition(arr,k+1,j);
+        }
+        temp = left+right+1;
         if(temp<minm ){
             minm = temp;
         }
